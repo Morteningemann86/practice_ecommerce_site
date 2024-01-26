@@ -1,8 +1,21 @@
 *** Settings ***
-Library    RPA.Browser.Playwright    AS    PLAY
-Variables    variables.py
+Library         RPA.Browser.Playwright    AS    PLAY
+Library         String
+Library    Collections
+Variables       variables.py
+
 
 *** Keywords ***
 Open E-Commerce Site
-    PLAY.Open Browser    ${URL_ECOMMERCE_SITE}
-    PLAY.Wait For Elements State    xpath=//*[@id="login-button"]    
+    Open Browser    ${URL_ECOMMERCE_SITE}
+    Wait For Elements State    xpath=//*[@id="login-button"]
+
+Get Usernames and Password From Login Page
+    ${usernames}    get text    xpath=//*[@id="login_credentials"]
+    ${usernames_list}    Split String    ${usernames}    \n
+    Remove From List    ${usernames_list}    0
+    ${password}    Get Text    xpath=//*[@class="login_password"]
+    ${password_list}    Split String    ${password}    \n
+    Remove From List    ${password_list}    0
+
+    RETURN    ${usernames_list}    ${password_list}
