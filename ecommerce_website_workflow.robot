@@ -19,3 +19,14 @@ Get Usernames and Password From Login Page
     Remove From List    ${password_list}    0
 
     RETURN    ${usernames_list}    ${password_list}
+
+Login to E-Commerce Site
+    [Arguments]    ${username}    ${password}
+    Fill Text    xpath=//*[@id="user-name"]    ${username}
+    Fill Text    xpath=//*[@id="password"]    ${password}
+    Click    xpath=//*[@id="login-button"]
+
+    Wait For Elements State    xpath=//*[@class="title"]
+
+Scrape Product Data
+    
