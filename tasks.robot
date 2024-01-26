@@ -11,6 +11,8 @@ Buy Stuff From E-Commerce Site
 
     FOR    ${usernames}    IN    @{usernames}
         Login to E-Commerce Site    ${usernames}    ${password}[0]
+        Scrape Product Data 
+
         Log    message
         
     END
